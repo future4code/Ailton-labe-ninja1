@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class HomeCadastrar extends Component {
+export default class TelaCadastrar extends Component {
   render() {
     return (
       <div>

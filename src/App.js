@@ -5,7 +5,6 @@ import Pagehome from './components/pages/Pagehome'
 import Carrinho from './components/pages/Carrinho'
 import CadastrarJob from './components/pages/CadastrarJobs/CadastrarJob'
 
-
 class App extends Component {
   state = {
     paginaAtual: "Pagehome"
@@ -31,6 +30,8 @@ class App extends Component {
     })
 
   }
+
+
   render() {
     return (
       <div>
