@@ -1,34 +1,13 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-
-
 export default class TelaCadastrar extends Component {
   state = {
     titulo: '',
     descricao: '',
-    valor: 0,
+    valor: '',
     formaPagamento: '',
     data: '',
-    // verJobs: [],
-    // jobs: {}
   }
-  // componentDidMount = () => {
-  //   this.mostrarJobs()
-  // }
-  
-  // mostrarJobs = () => {
-  //   axios.get('https://labeninjas.herokuapp.com/jobs', {
-  //     headers: {
-  //       Authorization: "30167c40-cd85-49b4-96f6-7d20b939127f"
-  //     }
-  //   }).then ((response) => {
-  //     this.setState({
-  //       verJobs: response.data
-  //     })
-  //   }).catch ((err) => {
-  //     console.log(err.message)
-  //   })
-  // }
   onChangeTitulo = (event) => {
     this.setState({
       titulo: event.target.value
@@ -49,7 +28,7 @@ export default class TelaCadastrar extends Component {
   }
   onChangeformaPagamento = (event) => {
     this.setState({
-      formaPagamento: [event.target.value] 
+      formaPagamento: [event.target.value]
     })
     console.log(this.state.formaPagamento)
   }
@@ -59,15 +38,9 @@ onChangeData = (event) =>{
   })
   console.log(this.state.data)
 }
-
 addJobs = () => {
   const url = 'https://labeninjas.herokuapp.com/jobs'
   const body = {
-    // title: this.state.titulo,
-    // description: this.state.descricao,
-    // price: this.state.valor,
-    // paymentMethods: this.state.formaPagamento,
-    // dueDate: this.state.data
     title: this.state.titulo,
     description:this.state.descricao,
     price: +this.state.valor,
@@ -81,18 +54,11 @@ addJobs = () => {
   }).then((res) => {
     // const NovoJob = [...this.state.verJobs, this.state.jobs]
     console.log(res)
-    // this.setState({// verJobs: NovoJob})
   }).catch((err)=> {
     console.log(err)
   })
 }
-
   render() {
-    // const MostrarJobs = this.state.verJobs.map((item, index) => {
-    //   return <div key={index}>
-    //     {item}
-    //   </div>
-    // })
     return (
       <div>
         <form>
@@ -103,7 +69,6 @@ addJobs = () => {
           <input value={this.state.descricao} onChange={this.onChangeDescricao}/>
           <label>Valor</label>
           <input type="number" value={this.state.valor} onChange={this.onChangeValor}/>
-          {/* forma de pagamento de prazo */}
           <br />
           <label>Forma de pagamento</label>
           <select value={this.state.formaPagamento} onChange={this.onChangeformaPagamento}>
@@ -114,8 +79,7 @@ addJobs = () => {
             <option value="Cartão de crédito">Cartão de crédito</option>
           </select>
           <label>Prazo</label>
-          <input type="date" value={this.state.data} onChange={this.onChangeData}/> 
-        {/* {MostrarJobs} */}
+          <input type="date" value={this.state.data} onChange={this.onChangeData}/>
         </form>
         <button onClick={this.addJobs}>Add job</button>
       </div>
