@@ -30,7 +30,7 @@ export default class Pagehome extends Component {
       <div>
       <header>
         <Head>
-        <h1>Labeninja</h1>
+        <h1>Labeninjas</h1>
         <AreaP>
         <p onClick={this.props.irParaHome}>Home</p>
         <p onClick={this.props.irParaCarrinho}> Carrinho</p>
