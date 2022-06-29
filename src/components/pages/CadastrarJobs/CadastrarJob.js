@@ -57,6 +57,7 @@ const FotoNinja = styled.img`
   width: 400px;
   border-radius: 30px;
   margin-top: 16px;
+  
 
   
 `
@@ -67,13 +68,11 @@ export default class CadastrarJob extends Component {
     verJobs: false
   }
 
-  // componentDidMount() {
-  //   this.mostrarJobs()
-  // }
 
   irParaTelaCadastrar = () => {
     this.setState({
-      clicou: !this.state.clicou
+      clicou: !this.state.clicou 
+     
     })
   }
   irParaListaJobs = () => {
@@ -82,38 +81,22 @@ export default class CadastrarJob extends Component {
     })
   }
 
-  // mostrarJobs = () => {
-  //   axios.get('https://labeninjas.herokuapp.com/jobs', {
-  //     headers: {
-  //       Authorization: "30167c40-cd85-49b4-96f6-7d20b939127f"
-  //     }
-  //   }).then ((response) => {
-  //     this.setState({verJobs: response.data.jobs})
-  //   }).catch ((err) => {
-  //     console.log(err.message)
-  //   })
-  // }
   render() {
-    // const listaJobs = this.state.verJobs.map((job) => {
-    //   return (
-    //     <div key={job.id}>
-    //       {job.title}
-    //     </div>
-    //   )
-    // })
-
+  
     return (
       <div>
         <AreaTotal>
           <AreaCadastro>
             <AreaCars>
-            <FotoNinja src={image}></FotoNinja>
+            
               {this.state.clicou ? <TelaCadastrar /> : ""}
+              <FotoNinja src={image}></FotoNinja>
               <EstiloBotoes onClick={this.irParaTelaCadastrar}>Faça parte do time de ninjas</EstiloBotoes>
-
+              
               <EstiloBotoes onClick={this.irParaListaJobs}>Contrate um ninja</EstiloBotoes>
               {this.state.verJobs ? <ListaJobs /> : ""}
-              {/* {listaJobs} */}
+             
+            
             </AreaCars>
           </AreaCadastro>
         </AreaTotal>

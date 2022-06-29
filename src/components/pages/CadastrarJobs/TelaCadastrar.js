@@ -1,5 +1,41 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import styled from 'styled-components'
+
+const Areainput = styled.div`
+padding:10px;
+display:flex;
+flex-direction: column;
+input, select{
+  width: 100%;
+  border-radius: 15px;
+  padding: 4px;
+  outline: none;
+  background-color: #A8A0D9;
+  color: white;
+}
+h1 {
+  margin-bottom: 45px;
+  font-size: 22px;
+  border-bottom: 2px solid  #A8A0D9;
+}
+ 
+`
+const EstiloBotao = styled.button`
+background-color: #7165BF;
+  color: white;
+  font-size: medium;
+  border-radius: 30px;
+  width: 50%;
+  padding: 4px;
+  margin: 4px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  :hover {
+  background-color: #A8A0D9;
+}
+`
 export default class TelaCadastrar extends Component {
   state = {
     titulo: '',
@@ -62,9 +98,10 @@ addJobs = () => {
     return (
       <div>
         <form>
-          HomeCadastrar <br />
-          <label>Titulo</label>
-          <input value={this.state.titulo} onChange={this.onChangeTitulo}/>
+          <Areainput>
+          <h1>Cadastrar</h1>
+          {/* <label>Titulo</label> */}
+          <input placeholder='Digite o Titulo' value={this.state.titulo} onChange={this.onChangeTitulo}/>
           <label>Descrição</label>
           <input value={this.state.descricao} onChange={this.onChangeDescricao}/>
           <label>Valor</label>
@@ -80,8 +117,9 @@ addJobs = () => {
           </select>
           <label>Prazo</label>
           <input type="date" value={this.state.data} onChange={this.onChangeData}/>
+          </Areainput>
         </form>
-        <button onClick={this.addJobs}>Add job</button>
+        <EstiloBotao onClick={this.addJobs}>Add job</EstiloBotao>
       </div>
     )
   }
