@@ -1,6 +1,61 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-export default class TelaCadastrar extends Component {
+import styled from 'styled-components'
+
+const BotaoHome = styled.button`
+  background-color: #7165BF;
+  color: white;
+  font-size: medium;
+  border-radius: 30px;
+  width: 12%;
+  padding: 8px;
+  margin: 16px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  :hover {
+  background-color: #A8A0D9;
+  }
+`
+
+const AreaForm = styled.div`
+  border: 1px solid #7165BF;
+  padding: 10px;
+  margin: 12px;
+`
+
+const Select = styled.select`
+  margin-right: 20px;
+`
+
+const InputForm = styled.input`
+  border: 1px solid #7165BF;
+  padding: 10px;
+  margin: 20px;
+`
+
+const LabelForm = styled.label`
+  padding-right: 10px;
+  
+`
+
+const BotaoAdd = styled.button`
+background-color: #7165BF;
+color: white;
+font-size: medium;
+border-radius: 30px;
+width: 10%;
+padding: 8px;
+margin: 16px;
+cursor: pointer;
+border: none;
+outline: none;
+:hover {
+background-color: #A8A0D9;
+}
+`
+
+export default class Cadastrar extends Component {
   state = {
     titulo: '',
     descricao: '',
@@ -54,6 +109,7 @@ addJobs = () => {
   }).then((res) => {
     // const NovoJob = [...this.state.verJobs, this.state.jobs]
     console.log(res)
+    alert('Serviço adicionado')
   }).catch((err)=> {
     console.log(err)
   })
@@ -61,27 +117,30 @@ addJobs = () => {
   render() {
     return (
       <div>
+        <BotaoHome onClick={this.props.irParaHome}>Voltar para home</BotaoHome >
+      <AreaForm>
         <form>
-          HomeCadastrar <br />
+          Faça seu cadastro e se torne um ninja <br />
           <label>Titulo</label>
-          <input value={this.state.titulo} onChange={this.onChangeTitulo}/>
+          <InputForm value={this.state.titulo} onChange={this.onChangeTitulo}/>
           <label>Descrição</label>
-          <input value={this.state.descricao} onChange={this.onChangeDescricao}/>
+          <InputForm value={this.state.descricao} onChange={this.onChangeDescricao}/>
           <label>Valor</label>
-          <input type="number" value={this.state.valor} onChange={this.onChangeValor}/>
+          <InputForm type="number" value={this.state.valor} onChange={this.onChangeValor}/>
           <br />
-          <label>Forma de pagamento</label>
-          <select value={this.state.formaPagamento} onChange={this.onChangeformaPagamento}>
+          <LabelForm>Forma de pagamento</LabelForm >
+          <Select value={this.state.formaPagamento} onChange={this.onChangeformaPagamento}>
             <option value=""></option>
             <option value="Em espécie">Em espécie</option>
             <option value="Boleto">Boleto</option>
-            <option value="Cartão deDébito">Cartão deDébito</option>
+            <option value="Cartão deDébito">Cartão de Débito</option>
             <option value="Cartão de crédito">Cartão de crédito</option>
-          </select>
-          <label>Prazo</label>
-          <input type="date" value={this.state.data} onChange={this.onChangeData}/>
+          </Select>
+          <LabelForm >Prazo</LabelForm >
+          <InputForm type="date" value={this.state.data} onChange={this.onChangeData}/>
         </form>
-        <button onClick={this.addJobs}>Add job</button>
+        <BotaoAdd onClick={this.addJobs}>Enviar</BotaoAdd>
+      </AreaForm>
       </div>
     )
   }

@@ -3,7 +3,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import {theme} from "./theme"
 import Pagehome from './components/pages/Pagehome'
 import Carrinho from './components/pages/Carrinho'
-import CadastrarJob from './components/pages/CadastrarJobs/CadastrarJob'
+import ListaJobs from './components/pages/ContratarJobs/ListaJobs'
+import Cadastrar from './components/pages/Cadastro/Cadastrar'
 
 class App extends React.Component {
   state = {
@@ -13,9 +14,13 @@ class App extends React.Component {
   trocarTela = () => {
     switch (this.state.paginaAtual) {
       case "Pagehome":
-        return <Pagehome irParaCarrinho={this.irParaCarrinho} />
+        return <Pagehome irParaCarrinho={this.irParaCarrinho} irParaCadastroNinja={this.irParaCadastroNinja} irParaServicos={this.irParaServicos} />
       case "Carrinho":
         return <Carrinho irParaHome={this.irParaHome} />
+      case "ListaJobs":
+        return <ListaJobs irParaHome={this.irParaHome} />
+      case "Cadastrar":
+        return <Cadastrar irParaHome={this.irParaHome} />
       default:
         return <Pagehome irParaCarrinho={this.irParaCarrinho} />
     }
@@ -30,14 +35,23 @@ class App extends React.Component {
     this.setState({
       paginaAtual: "Carrinho"
     })
+  }
 
+  irParaCadastroNinja = () => {
+    this.setState({
+      paginaAtual: "ListaJobs"
+    })
+  }
+  irParaServicos = () => {
+    this.setState({
+      paginaAtual: "Cadastrar"
+    })
   }
 
   render() {
     return (
       <ChakraProvider theme={theme}>
           {this.trocarTela()}
-          <CadastrarJob/>
       </ChakraProvider>
     )
   }
