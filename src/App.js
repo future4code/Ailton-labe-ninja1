@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import axios from 'axios'
+import React from 'react'
+import { ChakraProvider } from '@chakra-ui/react'
+import {theme} from "./theme"
 import Pagehome from './components/pages/Pagehome'
 import Carrinho from './components/pages/Carrinho'
 import CadastrarJob from './components/pages/CadastrarJobs/CadastrarJob'
 
-class App extends Component {
+class App extends React.Component {
   state = {
     paginaAtual: "Pagehome"
   }
@@ -16,6 +16,8 @@ class App extends Component {
         return <Pagehome irParaCarrinho={this.irParaCarrinho} />
       case "Carrinho":
         return <Carrinho irParaHome={this.irParaHome} />
+      default:
+        return <Pagehome irParaCarrinho={this.irParaCarrinho} />
     }
   }
 
@@ -31,13 +33,12 @@ class App extends Component {
 
   }
 
-
   render() {
     return (
-      <div>
-        {this.trocarTela()}
-        <CadastrarJob/>
-      </div>
+      <ChakraProvider theme={theme}>
+          {this.trocarTela()}
+          <CadastrarJob/>
+      </ChakraProvider>
     )
   }
 }
