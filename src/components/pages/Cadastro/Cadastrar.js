@@ -117,6 +117,7 @@ addJobs = () => {
   render() {
     return (
       <div>
+        <h2><b>CADASTRO</b></h2>
         <BotaoHome onClick={this.props.irParaHome}>Voltar para home</BotaoHome >
       <AreaForm>
         <form>

@@ -99,10 +99,13 @@ export default class ListaJobs extends Component {
             )
           })
     return (
+      <div>
+        <h2><b>LISTA DE SERVIÇOS</b></h2>
       <AreaTotal>
         {listaJobs}
         <BotaoHome onClick={this.props.irParaHome}>Voltar para home</BotaoHome >
       </AreaTotal>
+      </div>
     )
   }
 }
