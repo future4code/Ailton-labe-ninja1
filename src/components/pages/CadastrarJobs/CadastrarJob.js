@@ -4,6 +4,7 @@ import ListaJobs from './ListaJobs'
 import TelaCadastrar from './TelaCadastrar'
 import styled from 'styled-components'
 import img from '../../../components/images/banner.jpg'
+import image from '../../../components/images/logoninjas.png'
 
 const AreaTotal = styled.div`
  height: 100vh;
@@ -29,10 +30,35 @@ const AreaCars = styled.div`
     margin: auto;
     width: 100px;
     height: 100px;
-    background-color: aquamarine;
-    width: 800px;
-    height: 800px;
+    background-color: #F5F4FB;
+    width: 500px;
+    height: 500px;
     border-radius: 30px;
+    text-align: center;
+`
+
+const EstiloBotoes = styled.button`
+  background-color: #7165BF;
+  color: white;
+  font-size: medium;
+  border-radius: 30px;
+  width: 90%;
+  padding: 4px;
+  margin: 4px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  :hover {
+  background-color: #A8A0D9;
+  }
+`
+
+const FotoNinja = styled.img`
+  width: 400px;
+  border-radius: 30px;
+  margin-top: 16px;
+
+  
 `
 
 export default class CadastrarJob extends Component {
@@ -81,10 +107,11 @@ export default class CadastrarJob extends Component {
         <AreaTotal>
           <AreaCadastro>
             <AreaCars>
+            <FotoNinja src={image}></FotoNinja>
               {this.state.clicou ? <TelaCadastrar /> : ""}
-              <button onClick={this.irParaTelaCadastrar}>Criar job</button>
+              <EstiloBotoes onClick={this.irParaTelaCadastrar}>Faça parte do time de ninjas</EstiloBotoes>
 
-              <button onClick={this.irParaListaJobs}>Ver jobs</button>
+              <EstiloBotoes onClick={this.irParaListaJobs}>Contrate um ninja</EstiloBotoes>
               {this.state.verJobs ? <ListaJobs /> : ""}
               {/* {listaJobs} */}
             </AreaCars>
