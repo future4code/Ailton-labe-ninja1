@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
+import Header from '../Header/Header'
+
 
 const BotaoHome = styled.button`
   background-color: #7165BF;
@@ -30,8 +32,10 @@ const Select = styled.select`
 
 const InputForm = styled.input`
   border: 1px solid #7165BF;
+  border-radius: 5px;
   padding: 10px;
   margin: 20px;
+
 `
 
 const LabelForm = styled.label`
@@ -53,6 +57,12 @@ outline: none;
 :hover {
 background-color: #A8A0D9;
 }
+`
+const Titulo = styled.h1`
+ display:flex;
+ justify-content:center;
+
+  
 `
 
 export default class Cadastrar extends Component {
@@ -117,7 +127,10 @@ addJobs = () => {
   render() {
     return (
       <div>
-        <h2><b>CADASTRO</b></h2>
+        <Header/> 
+        
+       
+        <Titulo><b>CADASTRO</b></Titulo>
         <BotaoHome onClick={this.props.irParaHome}>Voltar para home</BotaoHome >
       <AreaForm>
         <form>
@@ -140,8 +153,9 @@ addJobs = () => {
           <LabelForm >Prazo</LabelForm >
           <InputForm type="date" value={this.state.data} onChange={this.onChangeData}/>
         </form>
-        <BotaoAdd onClick={this.addJobs}>Enviar</BotaoAdd>
+        <BotaoAdd onClick={this.addJobs}>Cadastrar</BotaoAdd>
       </AreaForm>
+     
       </div>
     )
   }

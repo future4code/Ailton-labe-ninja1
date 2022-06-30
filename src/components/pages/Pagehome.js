@@ -1,32 +1,10 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import ListaJobs from './ContratarJobs/ListaJobs'
-import TelaCadastrar from './Cadastro/Cadastrar'
 import img from '../../components/images/banner.jpg'
-import image from '../../components/images/logoninjas.png'
+import image from '../../components/images/logo2.png'
+import Footer2 from './Footer/Footer'
+import Header from './Header/Header'
 
-const HeaderArea = styled.header`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 800px;
-    margin: 0 auto;
-    height: 90px;
-    h1 {
-      color: #ccc;
-    }
-`
-
-const AreaMenu = styled.div`
-  display: flex;
-  p {
-    margin: 10px;
-    cursor: pointer;
-    :hover {
-      color: #510696;
-    }
-  }
-`
 
 const AreaTotal = styled.div`
  height: 100vh;
@@ -55,7 +33,7 @@ const AreaCars = styled.div`
     margin: auto;
     width: 100px;
     height: 100px;
-    background-color: #F5F4FB;
+    background-color: white;
     width: 500px;
     height: 500px;
     border-radius: 30px;
@@ -101,30 +79,27 @@ const FotoNinja = styled.img`
   margin-left: 50px;
 `
 
+
 export default class Pagehome extends Component {
 
   render() {
     return (
       <div>
-        <HeaderArea>
-        <h1>Labeninjas</h1>
-        <AreaMenu>
-        <p onClick={this.props.irParaCarrinho}> Carrinho</p>
-        </AreaMenu>
-        </HeaderArea>
-
+      <Header/>
         <AreaTotal>
           <AreaCadastro>
             <AreaCars>
-            <FotoNinja src={image}></FotoNinja>
+              <FotoNinja src={image}></FotoNinja>
 
               <EstiloBotaoServicos onClick={this.props.irParaServicos}>Faça parte do time de ninjas</EstiloBotaoServicos>
-             
+
               <EstiloBotaoNinja onClick={this.props.irParaCadastroNinja}>Contrate um ninja</EstiloBotaoNinja>
             </AreaCars>
           </AreaCadastro>
         </AreaTotal>
-       
+
+        <Footer2 />
+
       </div>
     )
   }
