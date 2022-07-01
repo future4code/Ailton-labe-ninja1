@@ -7,7 +7,7 @@ import Header from './Header/Header'
 
 
 const AreaTotal = styled.div`
- height: 100vh;
+ min-height: 1050px;
  background-color: #510696;
  position: relative;
  text-align: center;
@@ -31,10 +31,8 @@ const AreaCars = styled.div`
     left: 0;     
     right: 0;
     margin: auto;
-    width: 100px;
-    height: 100px;
     background-color: white;
-    width: 500px;
+    max-width: 500px;
     height: 500px;
     border-radius: 30px;
     text-align: center;
@@ -45,7 +43,7 @@ const EstiloBotaoNinja = styled.button`
   color: white;
   font-size: medium;
   border-radius: 30px;
-  width: 90%;
+  width: 80%;
   padding: 4px;
   margin: 4px;
   cursor: pointer;
@@ -61,7 +59,7 @@ const EstiloBotaoServicos = styled.button`
   color: white;
   font-size: medium;
   border-radius: 30px;
-  width: 90%;
+  width: 80%;
   padding: 4px;
   margin: 4px;
   cursor: pointer;
@@ -73,7 +71,7 @@ const EstiloBotaoServicos = styled.button`
 `
 
 const FotoNinja = styled.img`
-  width: 400px;
+  width: 80%;
   border-radius: 30px;
   margin-top: 16px;
   margin-left: 50px;
@@ -85,7 +83,7 @@ export default class Pagehome extends Component {
   render() {
     return (
       <div>
-      <Header/>
+        <Header />
         <AreaTotal>
           <AreaCadastro>
             <AreaCars>

@@ -4,28 +4,28 @@ import styled from 'styled-components'
 import Footer2 from '../Footer/Footer'
 import Header from '../Header/Header'
 
+const Container = styled.div`
+display: flex;
+justify-content: center;
+min-height: 1010px;
+`
 const AreaTotal = styled.div`
  border: 2px solid #510696;
  margin-top: 20px;
  margin-bottom: 20px;
- margin-left: 500px;
  text-align: center;
- width: 30%;
+ width: 800px;
  display: flex;
  flex-direction: column;
- justify-content: center;
- align-items: center;
-
 `
 
 const BotaoDel = styled.button`
   display: flex;
-  flex-direction: row;
   background-color: #7165BF;
   color: white;
   font-size: medium;
   border-radius: 30px;
-  width: 70%;
+  width: 50%;
   padding: 8px;
   margin: 16px;
   cursor: pointer;
@@ -52,9 +52,10 @@ const BotaoHome = styled.button`
   }
 `
 const Titulo = styled.h1`
- display:flex;
- justify-content:center;
- 
+margin-top: 10px;
+ text-align: center;
+ font-weight: bold;
+ font-size: 22px;
 `
 
 const Card = styled.div`
@@ -63,6 +64,10 @@ const Card = styled.div`
   padding: 15px;
   margin: 12px;
 
+`
+const CardFlex = styled.div`
+display: flex;
+justify-content: space-between;
 `
 export default class ListaJobs extends Component {
   state = {
@@ -107,22 +112,32 @@ export default class ListaJobs extends Component {
     const listaJobs = this.state.verJobs.map((job) => {
       return (
         <Card key={job.id}>
-          <h3>{job.title}</h3>
-          <p>
-            <b>Preço:</b> R$ {job.price}
-          </p>
-          <BotaoDel onClick={() => this.deletarJobs(job.id)}>Deletar</BotaoDel>
+          <CardFlex>
+            <h3>{job.title}</h3>
+            <p>{job.description}</p>
+            <p>
+              <b>Preço:</b> R$ {job.price}
+            </p>
+          </CardFlex>
+          <div>
+            <BotaoDel onClick={() => this.deletarJobs(job.id)}>Deletar</BotaoDel>
+          </div>
         </Card>
       )
     })
     return (
       <div>
         <Header />
-        <Titulo><b>LISTA DE SERVIÇOS</b></Titulo>
-        <AreaTotal>
-          {listaJobs}
-          <BotaoHome onClick={this.props.irParaHome}>Voltar para home</BotaoHome >
-        </AreaTotal>
+
+        <Titulo>Lista de serviços</Titulo>
+        <Container>
+          <AreaTotal>
+            {listaJobs}
+            <div>
+              <BotaoHome onClick={this.props.irParaHome}>Voltar para home</BotaoHome >
+            </div>
+          </AreaTotal>
+        </Container>
 
         <Footer2 />
       </div>
