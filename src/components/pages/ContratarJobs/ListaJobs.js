@@ -46,6 +46,7 @@ const Titulo = styled.h1`
  display:flex;
  justify-content:center;
  padding: 8px;
+ color: purple;
 `
 const JobTitle = styled.h2`
  display:flex;
