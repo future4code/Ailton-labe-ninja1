@@ -8,7 +8,7 @@ import Header from './Header/Header'
 
 const AreaTotal = styled.div`
  height: 100vh;
- background-color: #510696;
+ background-color: #8878c7;
  position: relative;
  text-align: center;
 `
@@ -41,7 +41,7 @@ const AreaCars = styled.div`
 `
 
 const EstiloBotaoNinja = styled.button`
-  background-color: #7165BF;
+  background-color: #8878c7;
   color: white;
   font-size: medium;
   border-radius: 30px;
@@ -57,7 +57,7 @@ const EstiloBotaoNinja = styled.button`
 `
 
 const EstiloBotaoServicos = styled.button`
-  background-color: #7165BF;
+  background-color: #8878c7;
   color: white;
   font-size: medium;
   border-radius: 30px;
@@ -85,7 +85,7 @@ export default class Pagehome extends Component {
   render() {
     return (
       <div>
-      <Header/>
+      <Header passaCarinho={this.props.irParaCarrinho} passaBotao={this.props.irParaHome}/>
         <AreaTotal>
           <AreaCadastro>
             <AreaCars>

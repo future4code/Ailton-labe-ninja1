@@ -17,7 +17,12 @@ const AreaTotal = styled.div`
  align-items: center;
 
 `
-
+const FiltersContainer = styled.div`
+   display: flex;
+   justify-content: flex-start;
+   flex-wrap:wrap;
+   padding: 8px;
+`
 const BotaoDel = styled.button`
   display: flex;
   flex-direction: row;
@@ -25,7 +30,6 @@ const BotaoDel = styled.button`
   color: white;
   font-size: medium;
   border-radius: 30px;
-  width: 70%;
   padding: 8px;
   margin: 16px;
   cursor: pointer;
@@ -54,19 +58,39 @@ const BotaoHome = styled.button`
 const Titulo = styled.h1`
  display:flex;
  justify-content:center;
- 
+ padding: 8px;
+`
+const JobTitle = styled.h2`
+ display:flex;
+ justify-content:center;
+ font-size: larger;
+ `
+
+const BordaInput = styled.input`
+  border: 1px solid #7165BF;
+  padding: 4px;
+  margin: 2px;
 `
 
 const Card = styled.div`
   border: 1px solid purple;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 23px;
   padding: 15px;
   margin: 12px;
+  background-color: #deddeb;
 
 `
 export default class ListaJobs extends Component {
   state = {
-    verJobs: []
+    verJobs: [],
+    busca: "",
+    minPrice: "",
+    maxPrice: ""
   }
   componentDidMount() {
     this.mostrarJobs()
@@ -103,25 +127,80 @@ export default class ListaJobs extends Component {
     }
   }
 
+  updateBusca = (event) => {
+    this.setState({busca: event.target.value})
+  }
+
+  updateMinPrice = (event) => {
+    this.setState({minPrice: event.target.value})
+  }
+
+  updateMaxPrice = (event) => {
+    this.setState({maxPrice: event.target.value})
+  }
+
   render() {
-    const listaJobs = this.state.verJobs.map((job) => {
+
+    const listaJobs = this.state.verJobs
+    .filter(job => {
+      return job.title.toLowerCase().includes(this.state.busca.toLowerCase()) ||
+        job.description.toLowerCase().includes(this.state.busca.toLowerCase())
+    })
+    .filter(job => {
+      return this.state.minPrice === "" || job.price >= this.state.minPrice
+    })
+    .filter(job => {
+      return this.state.maxPrice === "" || job.price <= this.state.maxPrice
+    })
+    .map((job) => {
       return (
         <Card key={job.id}>
-          <h3>{job.title}</h3>
+          <JobTitle><b>{job.title}</b></JobTitle>
           <p>
             <b>Preço:</b> R$ {job.price}
+          </p>
+          <p>
+            <b>Prazo:</b> {job.dueDate.slice(0, 10)}
           </p>
           <BotaoDel onClick={() => this.deletarJobs(job.id)}>Deletar</BotaoDel>
         </Card>
       )
     })
+
     return (
       <div>
-        <Header />
-        <Titulo><b>LISTA DE SERVIÇOS</b></Titulo>
+        <Header passaBotao={this.props.irParaHome} passaCarinho={this.props.irParaCarrinho}/>
+        <FiltersContainer>
+          <BordaInput
+            placeholder='Pesquisa'
+            value={this.state.busca}
+            onChange={this.updateBusca}
+          />
+           <BordaInput 
+            type="number"
+            placeholder='Valor mínimo'
+            value={this.state.minPrice}
+            onChange={this.updateMinPrice}
+          />
+           <BordaInput 
+            type="number"
+            placeholder='Valor máximo'
+            value={this.state.maxPrice}
+            onChange={this.updateMaxPrice}
+          />
+
+          <span>
+            <label for="sort">Ordenar: </label>
+            <select name="sort">
+              <option value="title"></option>
+              <option></option>
+              <option></option>
+            </select>
+          </span>
+        </FiltersContainer>
         <AreaTotal>
+          <Titulo><b>LISTA DE SERVIÇOS</b></Titulo>
           {listaJobs}
-          <BotaoHome onClick={this.props.irParaHome}>Voltar para home</BotaoHome >
         </AreaTotal>
 
         <Footer2 />
