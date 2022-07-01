@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import Header from './Header/Header'
 
 const BotaoHome = styled.button`
   background-color: #7165BF;

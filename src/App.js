@@ -16,13 +16,13 @@ class App extends React.Component {
       case "Pagehome":
         return <Pagehome irParaCarrinho={this.irParaCarrinho} irParaCadastroNinja={this.irParaCadastroNinja} irParaServicos={this.irParaServicos} />
       case "Carrinho":
-        return <Carrinho irParaHome={this.irParaHome} />
+        return <Carrinho irParaHome={this.irParaHome}/>
       case "ListaJobs":
-        return <ListaJobs irParaHome={this.irParaHome} />
+        return <ListaJobs irParaHome={this.irParaHome} irParaCarrinho={this.irParaCarrinho}/>
       case "Cadastrar":
-        return <Cadastrar irParaHome={this.irParaHome} />
+        return <Cadastrar irParaHome={this.irParaHome} irParaCarrinho={this.irParaCarrinho}/>
       default:
-        return <Pagehome irParaCarrinho={this.irParaCarrinho} />
+        return <Pagehome irParaCarrinho={this.irParaCarrinho}/>
     }
   }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 import Header from '../Header/Header'
+import Footer2 from '../Footer/Footer'
 
 
 const BotaoHome = styled.button`
@@ -127,11 +128,8 @@ addJobs = () => {
   render() {
     return (
       <div>
-        <Header/> 
-        
-       
-        <Titulo><b>CADASTRO</b></Titulo>
-        <BotaoHome onClick={this.props.irParaHome}>Voltar para home</BotaoHome >
+        <Header passaBotao={this.props.irParaHome} passaCarinho={this.props.irParaCarrinho}/> 
+        <br />
       <AreaForm>
         <form>
           Faça seu cadastro e se torne um ninja <br />
@@ -155,7 +153,7 @@ addJobs = () => {
         </form>
         <BotaoAdd onClick={this.addJobs}>Cadastrar</BotaoAdd>
       </AreaForm>
-     
+      
       </div>
     )
   }
