@@ -28,14 +28,35 @@ class App extends React.Component {
     })
   }
 
+  addCarrinho = (job) => {
+    const carrinhoCheio = [...this.state.carrinho, job]
+    this.setState({carrinho: carrinhoCheio})
+    alert(`Serviço adicionado ao carrinho`)
+  }
+
+  esvaziarItem = (id) => {
+    const canDelete = window.confirm("Deseja remover esse item do carrinho?")
+    if (canDelete){
+      const carrinhoVazio = this.state.carrinho.filter((item) => {
+        return item.id !== id
+      })
+      this.setState({carrinho: carrinhoVazio})
+    }
+  }
+
+  esvaziarCarrinho = () => {
+    this.setState({carrinho: []})
+    alert("Serviço comprado!")
+  }
+
   trocarTela = () => {
     switch (this.state.paginaAtual) {
       case "Pagehome":
         return <Pagehome trocarPagina={this.trocarPagina} />
       case "Carrinho":
-        return <Carrinho trocarPagina={this.trocarPagina} verDetalhes={this.verDetalhes}/>
+        return <Carrinho carrinho={this.state.carrinho} trocarPagina={this.trocarPagina} esvaziarItem={this.esvaziarItem} esvaziarCarrinho={this.esvaziarCarrinho}/>
       case "ListaJobs":
-        return <ListaJobs verDetalhes={this.verDetalhes}/>
+        return <ListaJobs verDetalhes={this.verDetalhes} addCarrinho={this.addCarrinho}/>
       case "Cadastrar":
         return <Cadastrar />
         case "Detalhar":

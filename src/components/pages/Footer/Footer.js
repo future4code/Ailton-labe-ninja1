@@ -11,9 +11,14 @@ import youtube from './../../images/youtube.png'
   justify-items: end;
   align-items: center;
   grid-column: 1/-1;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   background-color: #8878c7;
-width: 100%;
+  
+`
+const PosicaoFooter = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  
 `
 
 const ImagemRedeSocial = styled.img`
@@ -59,6 +64,7 @@ const ImagemRedeSocial = styled.img`
 export default  class Footer2 extends Component {
  render() {
 return (
+    <PosicaoFooter>
     <Footer>
 <TextoEsquerda>
 LabeNinjas
@@ -77,6 +83,7 @@ LabeNinjas
 </Redes>
 </SigamNos>
     </Footer>
+    </PosicaoFooter>
 )
 
 
