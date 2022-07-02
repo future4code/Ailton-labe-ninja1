@@ -3,9 +3,14 @@ import axios from 'axios'
 import styled from 'styled-components'
 
 const AreaForm = styled.div`
-  border: 1px solid #7165BF;
+display: flex;
+justify-content: center;
+align-items: center;
+  border: 2px solid #7165BF;
+  border-radius: 20px;
   padding: 10px;
   margin: 12px;
+ 
 `
 
 const Select = styled.select`
@@ -26,6 +31,9 @@ const LabelForm = styled.label`
 `
 
 const BotaoAdd = styled.button`
+display: flex;
+justify-content: center;
+align-items: center;
 background-color: #7165BF;
 color: white;
 font-size: medium;
@@ -38,8 +46,17 @@ border: none;
 outline: none;
 :hover {
 background-color: #A8A0D9;
+color: purple;
 }
 `
+const Titulo = styled.h1`
+ display:flex;
+ justify-content:center;
+ text-decoration-line: underline;
+  text-decoration-style: solid;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 5px purple;
+    `
 
 export default class Cadastrar extends Component {
   state = {
@@ -106,6 +123,8 @@ addJobs = () => {
   }).catch((err)=> {
     console.log(err)
   })
+  this.setState({ titulo: '', descricao: '', valor: '', formaPagamento: '',  data: ''})
+
 }
   render() {
     return (
@@ -113,25 +132,31 @@ addJobs = () => {
        <br />
       <AreaForm>
         <form>
-          Faça seu cadastro e se torne um ninja <br />
-          <label>Titulo</label>
+          <Titulo>Faça seu cadastro e se torne um ninja</Titulo> <br />
+          <label>Titulo:</label>
           <InputForm value={this.state.titulo} onChange={this.onChangeTitulo}/>
-          <label>Descrição</label>
+          <label>Descrição:</label>
           <InputForm value={this.state.descricao} onChange={this.onChangeDescricao}/>
-          <label>Valor</label>
+          <label>Valor:</label>
           <InputForm type="number" value={this.state.valor} onChange={this.onChangeValor}/>
           <br />
-          <LabelForm>Forma de pagamento</LabelForm >
-          <Select value={this.state.formaPagamento} onChange={this.onChangeformaPagamento}>
+          <LabelForm>Forma de pagamento:</LabelForm >
+          <Select value={this.state.formaPagamento} onChange={this.onChangeformaPagamento} >
             <option value=""></option>
             <option value="Em espécie">Em espécie</option>
             <option value="Boleto">Boleto</option>
             <option value="Cartão de Débito">Cartão de Débito</option>
             <option value="Cartão de crédito">Cartão de crédito</option>
           </Select>
-          <LabelForm >Prazo</LabelForm >
-          <InputForm type="date" value={this.state.data} onChange={this.onChangeData}/>
+          <LabelForm >Prazo:</LabelForm >
+          <InputForm 
+          type="date" 
+          value={this.state.data}
+           onChange={this.onChangeData}
+           />
         </form>
+   
+       
         <BotaoAdd onClick={this.addJobs}>Cadastrar</BotaoAdd>
       </AreaForm>
       
