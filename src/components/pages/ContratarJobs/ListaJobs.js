@@ -3,9 +3,10 @@ import axios from 'axios'
 import styled from 'styled-components'
 import Footer2 from '../Footer/Footer'
 import Header from '../Header/Header'
-
+import adicionarCarrinho from '../Carrinho'
 const AreaTotal = styled.div`
  border: 2px solid #510696;
+ border-radius: 20px;
  margin-top: 20px;
  margin-bottom: 20px;
  margin-left: 500px;
@@ -29,36 +30,23 @@ const BotaoDel = styled.button`
   background-color: #7165BF;
   color: white;
   font-size: medium;
+  border: 1px solid purple;
   border-radius: 30px;
   padding: 8px;
   margin: 16px;
   cursor: pointer;
-  border: none;
   outline: none;
   :hover {
   background-color: #A8A0D9;
+  color: purple;
   }
 `
 
-const BotaoHome = styled.button`
-  background-color: #7165BF;
-  color: white;
-  font-size: medium;
-  border-radius: 30px;
-  width: 50%;
-  padding: 8px;
-  margin: 16px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  :hover {
-  background-color: #A8A0D9;
-  }
-`
 const Titulo = styled.h1`
  display:flex;
  justify-content:center;
  padding: 8px;
+ color: purple;
 `
 const JobTitle = styled.h2`
  display:flex;
@@ -67,7 +55,8 @@ const JobTitle = styled.h2`
  `
 
 const BordaInput = styled.input`
-  border: 1px solid #7165BF;
+  border: 2px solid #7165BF;
+  border-radius: 20px;
   padding: 4px;
   margin: 2px;
 `
@@ -163,6 +152,7 @@ export default class ListaJobs extends Component {
             <b>Prazo:</b> {job.dueDate.slice(0, 10)}
           </p>
           <BotaoDel onClick={() => this.deletarJobs(job.id)}>Deletar</BotaoDel>
+          <BotaoDel onClick={() => this.props.adicionarCarrinho} >Adicionar ao Carrinho</BotaoDel>
         </Card>
       )
     })
@@ -193,8 +183,8 @@ export default class ListaJobs extends Component {
             <label for="sort">Ordenar: </label>
             <select name="sort">
               <option value="title"></option>
-              <option></option>
-              <option></option>
+              <option value="price"></option>
+              <option value="dueDate"></option>
             </select>
           </span>
         </FiltersContainer>
