@@ -1,7 +1,7 @@
 
 Projeto LabeNinjas
 
-    Link do projeto:
+    Link do projeto: gruesome-aunt.surge.sh
 
 
 A paleta de cores escolhida :(https://coolors.co/palette/231942-5e548e-9f86c0-be95c4-e0b1cb)
