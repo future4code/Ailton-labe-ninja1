@@ -1,25 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
-import Header from '../Header/Header'
-import Footer2 from '../Footer/Footer'
-
-
-const BotaoHome = styled.button`
-  background-color: #7165BF;
-  color: white;
-  font-size: medium;
-  border-radius: 30px;
-  width: 12%;
-  padding: 8px;
-  margin: 16px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  :hover {
-  background-color: #A8A0D9;
-  }
-`
 
 const AreaForm = styled.div`
 display: flex;
@@ -131,7 +112,14 @@ addJobs = () => {
   }).then((res) => {
     // const NovoJob = [...this.state.verJobs, this.state.jobs]
     console.log(res)
-    alert('Serviço adicionado')
+    alert(`Serviço ${this.state.titulo} adicionado`)
+    this.setState({
+      titulo: "",
+      descricao: "",
+      valor: "",
+      data: "",
+      formaPagamento: []
+    })
   }).catch((err)=> {
     console.log(err)
   })
@@ -141,8 +129,7 @@ addJobs = () => {
   render() {
     return (
       <div>
-        <Header passaBotao={this.props.irParaHome} passaCarinho={this.props.irParaCarrinho}/> 
-        <br />
+       <br />
       <AreaForm>
         <form>
           <Titulo>Faça seu cadastro e se torne um ninja</Titulo> <br />
@@ -158,7 +145,7 @@ addJobs = () => {
             <option value=""></option>
             <option value="Em espécie">Em espécie</option>
             <option value="Boleto">Boleto</option>
-            <option value="Cartão deDébito">Cartão de Débito</option>
+            <option value="Cartão de Débito">Cartão de Débito</option>
             <option value="Cartão de crédito">Cartão de crédito</option>
           </Select>
           <LabelForm >Prazo:</LabelForm >

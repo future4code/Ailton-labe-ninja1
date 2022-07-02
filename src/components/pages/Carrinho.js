@@ -4,6 +4,7 @@ import Header from './Header/Header'
 import job from '../pages/ContratarJobs/ListaJobs'
 import { Button } from '@chakra-ui/react'
 
+
 const BotaoHome = styled.button`
   background-color: #7165BF;
   color: white;

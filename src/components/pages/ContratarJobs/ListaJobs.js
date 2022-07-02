@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
-import Footer2 from '../Footer/Footer'
-import Header from '../Header/Header'
-import adicionarCarrinho from '../Carrinho'
+
 const AreaTotal = styled.div`
  border: 2px solid #510696;
  border-radius: 20px;
@@ -16,11 +14,10 @@ const AreaTotal = styled.div`
  flex-direction: column;
  justify-content: center;
  align-items: center;
-
 `
 const FiltersContainer = styled.div`
    display: flex;
-   justify-content: flex-start;
+   justify-content: space-between;
    flex-wrap:wrap;
    padding: 8px;
 `
@@ -48,19 +45,25 @@ const Titulo = styled.h1`
  padding: 8px;
  color: purple;
 `
-const JobTitle = styled.h2`
+const JobTitle = styled.span`
  display:flex;
  justify-content:center;
  font-size: larger;
+ cursor: pointer;
  `
 
 const BordaInput = styled.input`
   border: 2px solid #7165BF;
   border-radius: 20px;
   padding: 4px;
-  margin: 2px;
 `
 
+const EstiloSelect = styled.select`
+  border: 1px solid #7165BF;
+  padding: 4px;
+  height: 32px;
+`
+ 
 const Card = styled.div`
   border: 1px solid purple;
   text-align: center;
@@ -72,14 +75,18 @@ const Card = styled.div`
   padding: 15px;
   margin: 12px;
   background-color: #deddeb;
-
 `
+
 export default class ListaJobs extends Component {
   state = {
     verJobs: [],
     busca: "",
     minPrice: "",
-    maxPrice: ""
+    maxPrice: "",
+    sortingParameter: "title",
+    order: 1,
+    currentPage: false,
+    id: ""
   }
   componentDidMount() {
     this.mostrarJobs()
@@ -128,9 +135,16 @@ export default class ListaJobs extends Component {
     this.setState({maxPrice: event.target.value})
   }
 
-  render() {
+  updateSortingParameter = (event) => {
+    this.setState({sortingParameter: event.target.value})
+  }
 
-    const listaJobs = this.state.verJobs
+  updateOrder = (event) => {
+    this.setState({order: event.target.value})
+  }
+
+  render() {
+    const renderListaJobs = this.state.verJobs
     .filter(job => {
       return job.title.toLowerCase().includes(this.state.busca.toLowerCase()) ||
         job.description.toLowerCase().includes(this.state.busca.toLowerCase())
@@ -141,25 +155,34 @@ export default class ListaJobs extends Component {
     .filter(job => {
       return this.state.maxPrice === "" || job.price <= this.state.maxPrice
     })
+    .sort ((currentJob, nextJob) => {
+      switch (this.state.sortingParameter) {
+        case "title":
+          return this.state.order * currentJob.title.localeCompare(nextJob.title)
+        case "dueDate":
+          return this.state.order * (new Date(currentJob.dueDate).getTime() < new Date(nextJob.dueDate).getTime())
+        default:
+          return this.state.order * (currentJob.price - nextJob.price) 
+      }
+    })
     .map((job) => {
       return (
         <Card key={job.id}>
           <JobTitle><b>{job.title}</b></JobTitle>
           <p>
-            <b>Preço:</b> R$ {job.price}
+            <b>Preço:</b> R$ {job.price.toFixed(2).replace(".", ",")}
           </p>
           <p>
             <b>Prazo:</b> {job.dueDate.slice(0, 10)}
           </p>
+          <BotaoDel onClick={() => this.props.verDetalhes(job.id)}>Ver mais detalhes</BotaoDel>
           <BotaoDel onClick={() => this.deletarJobs(job.id)}>Deletar</BotaoDel>
           <BotaoDel onClick={() => this.props.adicionarCarrinho} >Adicionar ao Carrinho</BotaoDel>
         </Card>
       )
     })
-
     return (
       <div>
-        <Header passaBotao={this.props.irParaHome} passaCarinho={this.props.irParaCarrinho}/>
         <FiltersContainer>
           <BordaInput
             placeholder='Pesquisa'
@@ -181,19 +204,34 @@ export default class ListaJobs extends Component {
 
           <span>
             <label for="sort">Ordenar: </label>
-            <select name="sort">
-              <option value="title"></option>
-              <option value="price"></option>
-              <option value="dueDate"></option>
-            </select>
+
+            <EstiloSelect 
+              name="sort"
+              value={this.state.sortingParameter}
+              onChange={this.updateSortingParameter}
+            >
+              <option value="title">Título</option>
+              <option value="price">Preço</option>
+              <option value="dueDate">Prazo</option>
+            </EstiloSelect >
           </span>
+
+          <EstiloSelect 
+              name="order"
+              value={this.state.order}
+              onChange={this.updateOrder}
+          >
+            <option value={1}>Crescente</option>
+            <option value={-1}>Decrescente</option>
+          </EstiloSelect >
         </FiltersContainer>
         <AreaTotal>
           <Titulo><b>LISTA DE SERVIÇOS</b></Titulo>
-          {listaJobs}
+          <div>
+            {renderListaJobs}
+          </div>
         </AreaTotal>
 
-        <Footer2 />
       </div>
     )
   }

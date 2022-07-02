@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import img from '../../components/images/banner.jpg'
 import image from '../../components/images/logo2.png'
-import Footer2 from './Footer/Footer'
-import Header from './Header/Header'
+
 
 
 const AreaTotal = styled.div`
@@ -85,21 +84,17 @@ export default class Pagehome extends Component {
   render() {
     return (
       <div>
-      <Header passaCarinho={this.props.irParaCarrinho} passaBotao={this.props.irParaHome}/>
         <AreaTotal>
           <AreaCadastro>
             <AreaCars>
               <FotoNinja src={image}></FotoNinja>
 
-              <EstiloBotaoServicos onClick={this.props.irParaServicos}>Faça parte do time de ninjas</EstiloBotaoServicos>
+              <EstiloBotaoServicos onClick={() => this.props.trocarPagina("Cadastrar")}>Faça parte do time de ninjas</EstiloBotaoServicos>
 
-              <EstiloBotaoNinja onClick={this.props.irParaCadastroNinja}>Contrate um ninja</EstiloBotaoNinja>
+              <EstiloBotaoNinja onClick={() => this.props.trocarPagina("ListaJobs")}>Contrate um ninja</EstiloBotaoNinja>
             </AreaCars>
           </AreaCadastro>
         </AreaTotal>
-
-        <Footer2 />
-
       </div>
     )
   }
