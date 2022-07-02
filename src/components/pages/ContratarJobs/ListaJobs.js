@@ -103,25 +103,6 @@ export default class ListaJobs extends Component {
       console.log(err.message)
     })
   }
-  deletarJobs = (id) => {
-    if (window.confirm("Deseja deletar") === true) {
-      const url = `https://labeninjas.herokuapp.com/jobs/${id}`
-      axios.delete(url, {
-        headers: {
-          Authorization: "30167c40-cd85-49b4-96f6-7d20b939127f"
-        }
-      })
-        .then(() => {
-          alert("Deletado")
-          this.mostrarJobs()
-        })
-        .catch((err) => {
-          alert('Ocorreu um erro')
-        })
-    } else {
-
-    }
-  }
 
   updateBusca = (event) => {
     this.setState({busca: event.target.value})
@@ -176,8 +157,7 @@ export default class ListaJobs extends Component {
             <b>Prazo:</b> {job.dueDate.slice(0, 10)}
           </p>
           <BotaoDel onClick={() => this.props.verDetalhes(job.id)}>Ver mais detalhes</BotaoDel>
-          <BotaoDel onClick={() => this.deletarJobs(job.id)}>Deletar</BotaoDel>
-          <BotaoDel onClick={() => this.props.adicionarCarrinho} >Adicionar ao Carrinho</BotaoDel>
+          <BotaoDel onClick={() => this.props.addCarrinho(job.id)} >Adicionar ao Carrinho</BotaoDel>
         </Card>
       )
     })

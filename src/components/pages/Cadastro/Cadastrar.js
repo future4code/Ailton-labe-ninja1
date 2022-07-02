@@ -146,7 +146,7 @@ addJobs = () => {
             <option value="Em espécie">Em espécie</option>
             <option value="Boleto">Boleto</option>
             <option value="Cartão de Débito">Cartão de Débito</option>
-            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de crédito">Cartão de Crédito</option>
           </Select>
           <LabelForm >Prazo:</LabelForm >
           <InputForm 

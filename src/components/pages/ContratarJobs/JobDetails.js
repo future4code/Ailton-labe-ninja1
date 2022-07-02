@@ -14,6 +14,23 @@ const AreaTotal = styled.div`
  justify-content: center;
  align-items: center;
 `
+const Botao = styled.button`
+  display: flex;
+  flex-direction: row;
+  background-color: #7165BF;
+  color: white;
+  font-size: medium;
+  border: 1px solid purple;
+  border-radius: 30px;
+  padding: 8px;
+  margin: 16px;
+  cursor: pointer;
+  outline: none;
+  :hover {
+  background-color: #A8A0D9;
+  color: purple;
+  }
+`
 
 export default class JobDetails extends Component {
     state={
@@ -51,7 +68,7 @@ export default class JobDetails extends Component {
         <div>
             {arrayPagamento}
         </div>
-        <button onClick={() => this.props.trocarPagina("ListaJobs")}>Voltar para Lista de Serviços</button>
+        <Botao onClick={() => this.props.trocarPagina("ListaJobs")}>Voltar para Lista de Serviços</Botao>
         </AreaTotal>
     )
   }

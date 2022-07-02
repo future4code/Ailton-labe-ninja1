@@ -1,23 +1,34 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import Header from './Header/Header'
-import job from '../pages/ContratarJobs/ListaJobs'
-import { Button } from '@chakra-ui/react'
 
+const BotaoCarrinho = styled.button`
+margin: 4px;
+padding: 7px;
+width: 200px;
+border-radius: 20px;
+border:1px solid purple;
+:hover {
+  background-color: #8878c7;
+  color: white;
+  border:1px solid white;
+  }
+`
 
-const BotaoHome = styled.button`
+const Botao = styled.button`
+  display: flex;
+  flex-direction: row;
   background-color: #7165BF;
   color: white;
   font-size: medium;
+  border: 1px solid purple;
   border-radius: 30px;
-  width: 20%;
   padding: 8px;
   margin: 16px;
   cursor: pointer;
-  border: none;
   outline: none;
   :hover {
   background-color: #A8A0D9;
+  color: purple;
   }
 `
 
@@ -29,62 +40,37 @@ const AreaToda = styled.div`
 `
   
 export default class carrinho extends Component {
-  
-  adicionarCarrinho = (job) => {
-    let idJob = job.id;
-    const JobNoCarrinho = this.state.addCarrinho?.find(
-      (item) => idJob === item.id
-    );
-
-    if (JobNoCarrinho) {
-      const novoProduto = this.state.addCarrinho.map((jobAdd) => {
-        if (idJob === jobAdd.id) {
-          return {
-            ...jobAdd,
-            quantidade: jobAdd.quantidade + 1,
-          };
-        }
-        return jobAdd;
-      });
-      this.setState({ addCarrinho: novoProduto });
-    } else {
-      const novoJob = {
-        ...job,
-        quantidade: 1,
-      };
-      const novoJobCarrinho = [...this.state.addCarrinho, novoJob];
-      alert("Adiconado")
-      this.setState({ addCarrinho: novoJobCarrinho });
-    }
-  };
-
-  removeJobCarrinho = (jobId) => {
-    const removeDoCarrinho = this.state.addCarrinho
-      .map((job) => {
-        if (job.id === jobId) {
-          return {
-            ...job,
-            quantidade: job.quantidade - 1,
-          };
-        }
-        return job;
-      })
-      .filter((job) => job.quantidade > 0);
-
-    this.setState({ addCarrinho: removeDoCarrinho });
-    alert("Removido")
-  };
 
     render() {
+      const carrinhojobs = this.props.carrinho.map((job) => {
+        return <div key={job.id}>
+          <p>{job.title}</p>
+          <p>{job.price}</p>
+          <BotaoCarrinho onClick={() => this.props.esvaziarItem(job.id)}>Apagar item do seu carrinho</BotaoCarrinho>
+        </div>
+      })
 
+      let conta = 0
+
+      this.props.carrinho.forEach((job) => {
+        conta += job.price
+      })
      
     return (
       <AreaToda>
-        <p>Aqui é o carrinho</p>
-
-        jobNoCarrinho={this.state.addCarrinho}
-            removeJobCarrinho={this.removeJobCarrinho}
-        <BotaoHome onClick={this.props.irParaHome}>Voltar para home</BotaoHome >
+        {carrinhojobs.length > 0 ? (
+          <div>
+            {carrinhojobs}
+            <span>TOTAL DA COMPRA: R$ {conta}</span>
+            <Botao onClick={() => this.props.esvaziarCarrinho()}>Finalizar sua compra</Botao>
+            <Botao onClick={() => this.props.trocarPagina("ListaJobs")}>Voltar para Lista de Serviços</Botao>
+          </div>
+        ) : (
+          <div>
+          <p>CARRINHO VAZIO</p>
+          <Botao onClick={() => this.props.trocarPagina("ListaJobs")}>Voltar para Lista de Serviços</Botao>
+          </div>
+        )}
       </AreaToda>
     )
   }
