@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import imagem from '../../images/logo.png'
-import Carrinho from '../Carrinho'
-import Pagehome from '../Pagehome'
-
 
 const HeaderArea = styled.header`
 display: flex;  
@@ -56,8 +53,8 @@ export default  class Header extends Component {
 
 <AreaMenu>
 <Botoes>
-<BotaoCarrinho onClick={() => this.props.passaBotao()}>Home</BotaoCarrinho>
-<BotaoCarrinho onClick={() => this.props.passaCarinho()}>Carrinho</BotaoCarrinho>
+<BotaoCarrinho onClick={() => this.props.trocarPagina("Pagehome")}>Home</BotaoCarrinho>
+<BotaoCarrinho onClick={() => this.props.trocarPagina("Carrinho")}>Carrinho</BotaoCarrinho>
 </Botoes>
 </AreaMenu>
 </HeaderArea>
